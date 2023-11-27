@@ -7,11 +7,30 @@
     <link rel="shortcut icon" href="#" type="image/x-icon" />
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <button id="buttonRock">Rock</button>
-    <button id="buttonPaper">Paper</button>
-    <button id="buttonScissor">Scissor</button>
-    <button id="deleteUser" style="background-color: red">Delete User</button>
+  <body class="container">
+    <div class="top-heading">
+      <div class="score-board">
+        <div class="score-info">
+          <p id="userName"></p>
+          <p id="userScore"></p>
+        </div>
+        <div class="score-info">
+          <p>Computer</p>
+          <p id="computerScore">0</p>
+        </div>
+      </div>
+      <div>
+        <button id="deleteUser" class="delete-user-button">Delete User</button>
+      </div>
+    </div>
+    <div class="buttons">
+      <button id="buttonRock">Rock</button>
+      <button id="buttonPaper">Paper</button>
+      <button id="buttonScissor">Scissor</button>
+    </div>
+    <div class="information-block">
+      <p id="outcomeInfo"></p>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>

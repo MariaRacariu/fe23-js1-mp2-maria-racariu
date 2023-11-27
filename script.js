@@ -3,10 +3,12 @@ const buttonPaper = document.querySelector('#buttonPaper');
 const buttonScissors = document.querySelector('#buttonScissor');
 
 const buttonDeleteUser = document.querySelector('#deleteUser');
+const nameContainer = document.querySelector('#userName');
+const backgroundContainer = document.querySelector('.container');
 
-// Create heading for the username
-const nameContainer = document.createElement("h1");
-document.body.appendChild(nameContainer);
+const userScore = document.querySelector('#userScore');
+const computerScore = document.querySelector('#computerScore');
+const currentInfo = document.querySelector('#outcomeInfo');
 
 // Checks if userNameStore is undefined or null
 if(localStorage.getItem("userNameStorage") === undefined || localStorage.getItem("userNameStorage") === null){
@@ -54,32 +56,105 @@ buttonScissors.addEventListener("click", (event)=>{
     compareInputs(randomPCInput, userInput);
 });
 
+    let userPoints = 0;
+    userScore.innerText = `${userPoints}`;
+
+    let computerPoints = 0;
+    computerScore.innerText = `${computerPoints}`;
+
 function compareInputs(randomPCInput, userInput){
     const currentGame = `${randomPCInput} VS ${userInput}`;
     // Check Tie first
     if(randomPCInput === userInput){
-        alert(`${currentGame} IT'S A TIE`);
+        currentInfo.innerText = `${currentGame} It's a tie. No points awarded`;
         return;
     }
     
     // Check Rock, Paper and Scissors
     if(userInput === "Rock"){
         if(randomPCInput === "Scissors"){
-            alert(`${currentGame} You win`);
+            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} wins!`;
+            
+            backgroundContainer.classList.remove('background-lose');
+            backgroundContainer.classList.add('background-win');
+
+            userPoints++;
+            userScore.innerText = `${userPoints}`;
+
+            gameScoreCheck(userPoints, computerPoints);
         }else{
-            alert(`${currentGame} You lose`);
+            currentInfo.innerText = `${currentGame}  ${localStorage.getItem("userNameStorage", "value")} losses`;
+
+            backgroundContainer.classList.remove('background-win');
+            backgroundContainer.classList.add('background-lose');
+
+            computerPoints++;
+            computerScore.innerText = `${computerPoints}`;
+
+            gameScoreCheck(userPoints, computerPoints);
         }
     }else if(userInput === "Paper"){
         if(randomPCInput === "Rock"){
-            alert(`${currentGame} You win`);
+            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} wins`;
+
+            backgroundContainer.classList.remove('background-lose');
+            backgroundContainer.classList.add('background-win');
+
+            userPoints++;
+            userScore.innerText = `${userPoints}`;
+
+            gameScoreCheck(userPoints, computerPoints);
         }else{
-            alert(`${currentGame} You lose`);
+            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} losses`;
+
+            backgroundContainer.classList.remove('background-win');
+            backgroundContainer.classList.add('background-lose');
+
+            computerPoints++;
+            computerScore.innerText = `${computerPoints}`;
+
+            gameScoreCheck(userPoints, computerPoints);
         }
     }else if(userInput === "Scissors"){
         if(randomPCInput === "Paper"){
-            alert(`${currentGame} You win`);
+            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} wins`;
+
+            backgroundContainer.classList.remove('background-lose');
+            backgroundContainer.classList.add('background-win');
+
+            userPoints++;
+            userScore.innerText = `${userPoints}`;
+
+            gameScoreCheck(userPoints, computerPoints);
         }else{
-            alert(`${currentGame} You lose`);
+            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} losses`;
+
+            backgroundContainer.classList.remove('background-win');
+            backgroundContainer.classList.add('background-lose');
+
+            computerPoints++;
+            computerScore.innerText = `${computerPoints}`;
+
+            gameScoreCheck(userPoints, computerPoints);
         }
+    }
+}
+
+function gameScoreCheck(userPoints, computerPoints){
+    if (userPoints === 3){
+        alert(`${localStorage.getItem("userNameStorage", "value")} wins! Click ok to reset the game`);
+        userPoints = 0;
+        userScore.innerText = `${userPoints}`;
+        computerPoints = 0;
+        computerScore.innerText = `${computerPoints}`;
+        location.reload();
+        
+    }else if (computerPoints === 3){
+        alert(`${localStorage.getItem("userNameStorage", "value")} losses. Click ok to reset the game`);
+        userPoints = 0;
+        userScore.innerText = `${userPoints}`;
+        computerPoints = 0;
+        computerScore.innerText = `${computerPoints}`;
+        location.reload();
     }
 }

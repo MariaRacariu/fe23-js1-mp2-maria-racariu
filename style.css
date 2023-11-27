@@ -1,3 +1,64 @@
-*{
-    color: black;
+.top-heading{
+    display: flex;
+    justify-content: space-between;
+}
+.score-board{
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+}
+.delete-user-button{
+    border-radius: 25px;
+    border: 2px solid black;
+    padding: 7px;
+    background-color: #F14B40;
+    font-weight: bold;
+    cursor: pointer;
+}
+.score-info{
+    display: flex;
+    justify-content: space-between;
+    width: 10%;
+    font-size: larger;
+}
+.buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+.buttons > button{
+    height: 100px;
+    width: 200px;
+    font-size: larger;
+    margin: 20px;
+    border-radius: 50px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+
+.information-block{
+    display: flex;
+    justify-content: center;
+    font-size: larger;
+}
+
+@keyframes loseBg{
+    0% {background-color: #F14B40;}
+    50% {background-color: #ec938d;}
+    100% {background-color: #e5e1e1;}
+}
+
+@keyframes winBg{
+    0% {background-color: #37C94F;}
+    50% {background-color: #85c48f;}
+    100% {background-color: #e5e1e1;}
+}
+
+.background-win{
+    animation: winBg 1s ease-in-out;
+}
+
+.background-lose{
+    animation: loseBg 1s ease-in-out;
 }
