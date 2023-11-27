@@ -1,3 +1,6 @@
+body{
+    background-color:#e5e1e1;
+}
 .top-heading{
     display: flex;
     justify-content: space-between;
@@ -19,7 +22,7 @@
     display: flex;
     justify-content: space-between;
     width: 10%;
-    font-size: larger;
+    font-size: 25px;
 }
 .buttons{
     display: flex;
@@ -38,9 +41,8 @@
 }
 
 .information-block{
-    display: flex;
-    justify-content: center;
-    font-size: larger;
+    text-align: center;
+    font-size: 50px;
 }
 
 @keyframes loseBg{

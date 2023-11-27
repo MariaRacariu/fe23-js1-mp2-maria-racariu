@@ -9,6 +9,7 @@ const backgroundContainer = document.querySelector('.container');
 const userScore = document.querySelector('#userScore');
 const computerScore = document.querySelector('#computerScore');
 const currentInfo = document.querySelector('#outcomeInfo');
+const currentInfoUser = document.querySelector('#outcomeInfoUser');
 
 // Checks if userNameStore is undefined or null
 if(localStorage.getItem("userNameStorage") === undefined || localStorage.getItem("userNameStorage") === null){
@@ -27,7 +28,7 @@ function deleteUserName(){
 }
 // Add event listener on all buttons and event to return random number
 const gameOptions = ["Rock", "Paper", "Scissors"];
-
+// Add event Listener for all the buttons and assign variable
 buttonRock.addEventListener("click", (event)=>{
     let randomPCInput = gameOptions[Math.floor(Math.random()*3)];
     console.log(randomPCInput);
@@ -55,35 +56,38 @@ buttonScissors.addEventListener("click", (event)=>{
 
     compareInputs(randomPCInput, userInput);
 });
+// Create user and computer point variables to keep trac
+let userPoints = 0;
+userScore.innerText = `${userPoints}`;
 
-    let userPoints = 0;
-    userScore.innerText = `${userPoints}`;
+let computerPoints = 0;
+computerScore.innerText = `${computerPoints}`;
 
-    let computerPoints = 0;
-    computerScore.innerText = `${computerPoints}`;
-
+// Function for checking wins, loses and tie
 function compareInputs(randomPCInput, userInput){
     const currentGame = `${randomPCInput} VS ${userInput}`;
     // Check Tie first
     if(randomPCInput === userInput){
-        currentInfo.innerText = `${currentGame} It's a tie. No points awarded`;
+        currentInfo.innerText = `${currentGame}`;
+        currentInfoUser.innerText = "It's a tie. No points awarded";
         return;
     }
     
     // Check Rock, Paper and Scissors
     if(userInput === "Rock"){
         if(randomPCInput === "Scissors"){
-            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} wins!`;
-            
+            currentInfo.innerText = `${currentGame}`;
+            currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Wins!`;
             backgroundContainer.classList.remove('background-lose');
             backgroundContainer.classList.add('background-win');
-
+            
             userPoints++;
             userScore.innerText = `${userPoints}`;
 
             gameScoreCheck(userPoints, computerPoints);
         }else{
-            currentInfo.innerText = `${currentGame}  ${localStorage.getItem("userNameStorage", "value")} losses`;
+            currentInfo.innerText = `${currentGame} `;
+            currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Loses`;
 
             backgroundContainer.classList.remove('background-win');
             backgroundContainer.classList.add('background-lose');
@@ -95,7 +99,8 @@ function compareInputs(randomPCInput, userInput){
         }
     }else if(userInput === "Paper"){
         if(randomPCInput === "Rock"){
-            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} wins`;
+            currentInfo.innerText = `${currentGame}`;
+            currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Wins!`;
 
             backgroundContainer.classList.remove('background-lose');
             backgroundContainer.classList.add('background-win');
@@ -105,7 +110,8 @@ function compareInputs(randomPCInput, userInput){
 
             gameScoreCheck(userPoints, computerPoints);
         }else{
-            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} losses`;
+            currentInfo.innerText = `${currentGame}`;
+            currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Loses`;
 
             backgroundContainer.classList.remove('background-win');
             backgroundContainer.classList.add('background-lose');
@@ -117,7 +123,8 @@ function compareInputs(randomPCInput, userInput){
         }
     }else if(userInput === "Scissors"){
         if(randomPCInput === "Paper"){
-            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} wins`;
+            currentInfo.innerText = `${currentGame}`;
+            currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Wins!`;
 
             backgroundContainer.classList.remove('background-lose');
             backgroundContainer.classList.add('background-win');
@@ -127,7 +134,8 @@ function compareInputs(randomPCInput, userInput){
 
             gameScoreCheck(userPoints, computerPoints);
         }else{
-            currentInfo.innerText = `${currentGame} ${localStorage.getItem("userNameStorage", "value")} losses`;
+            currentInfo.innerText = `${currentGame}`;
+            currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Loses`;
 
             backgroundContainer.classList.remove('background-win');
             backgroundContainer.classList.add('background-lose');
@@ -139,7 +147,7 @@ function compareInputs(randomPCInput, userInput){
         }
     }
 }
-
+// Function to end the game when user or computer reaches 3 points
 function gameScoreCheck(userPoints, computerPoints){
     if (userPoints === 3){
         alert(`${localStorage.getItem("userNameStorage", "value")} wins! Click ok to reset the game`);
@@ -150,7 +158,7 @@ function gameScoreCheck(userPoints, computerPoints){
         location.reload();
         
     }else if (computerPoints === 3){
-        alert(`${localStorage.getItem("userNameStorage", "value")} losses. Click ok to reset the game`);
+        alert(`${localStorage.getItem("userNameStorage", "value")} loses. Click ok to reset the game`);
         userPoints = 0;
         userScore.innerText = `${userPoints}`;
         computerPoints = 0;
