@@ -12,16 +12,16 @@ const currentInfo = document.querySelector('#outcomeInfo');
 const currentInfoUser = document.querySelector('#outcomeInfoUser');
 
 // Checks if userNameStore is undefined or null
-if(localStorage.getItem("userNameStorage") === undefined || localStorage.getItem("userNameStorage") === null){
+if (localStorage.getItem("userNameStorage") === undefined || localStorage.getItem("userNameStorage") === null) {
     userNameInput = prompt("Please input a username");
-    localStorage.setItem("userNameStorage", userNameInput); 
+    localStorage.setItem("userNameStorage", userNameInput);
     nameContainer.innerText = localStorage.getItem("userNameStorage", "value");
     buttonDeleteUser.addEventListener('click', deleteUserName);
-}else{
+} else {
     buttonDeleteUser.addEventListener('click', deleteUserName);
     nameContainer.innerText = localStorage.getItem("userNameStorage", "value");
 }
-function deleteUserName(){
+function deleteUserName() {
     nameContainer.innerText = "";
     localStorage.removeItem("userNameStorage");
     location.reload();
@@ -29,30 +29,30 @@ function deleteUserName(){
 // Add event listener on all buttons and event to return random number
 const gameOptions = ["Rock", "Paper", "Scissors"];
 // Add event Listener for all the buttons and assign variable
-buttonRock.addEventListener("click", (event)=>{
-    let randomPCInput = gameOptions[Math.floor(Math.random()*3)];
-    console.log(randomPCInput);
-
+buttonRock.addEventListener("click", (event) => {
     const userInput = "Rock";
     console.log(userInput);
 
-    compareInputs(randomPCInput, userInput);
-});
-buttonPaper.addEventListener("click", (event)=>{
-    let randomPCInput = gameOptions[Math.floor(Math.random()*3)];
+    let randomPCInput = gameOptions[Math.floor(Math.random() * 3)];
     console.log(randomPCInput);
 
+    compareInputs(randomPCInput, userInput);
+});
+buttonPaper.addEventListener("click", (event) => {
     const userInput = "Paper";
     console.log(userInput);
 
-    compareInputs(randomPCInput, userInput);
-});
-buttonScissors.addEventListener("click", (event)=>{
-    let randomPCInput = gameOptions[Math.floor(Math.random()*3)];
+    let randomPCInput = gameOptions[Math.floor(Math.random() * 3)];
     console.log(randomPCInput);
 
+    compareInputs(randomPCInput, userInput);
+});
+buttonScissors.addEventListener("click", (event) => {
     const userInput = "Scissors";
     console.log(userInput);
+
+    let randomPCInput = gameOptions[Math.floor(Math.random() * 3)];
+    console.log(randomPCInput);
 
     compareInputs(randomPCInput, userInput);
 });
@@ -64,81 +64,83 @@ let computerPoints = 0;
 computerScore.innerText = `${computerPoints}`;
 
 // Function for checking wins, loses and tie
-function compareInputs(randomPCInput, userInput){
+function compareInputs(randomPCInput, userInput) {
     const currentGame = `${randomPCInput} VS ${userInput}`;
     // Check Tie first
-    if(randomPCInput === userInput){
+    if (randomPCInput === userInput) {
         currentInfo.innerText = `${currentGame}`;
         currentInfoUser.innerText = "It's a tie. No points awarded";
         return;
     }
-    
+
     // Check Rock, Paper and Scissors
-    if(userInput === "Rock"){
-        if(randomPCInput === "Scissors"){
+    if (userInput === "Rock") {
+        if (randomPCInput === "Scissors") {
             currentInfo.innerText = `${currentGame}`;
             currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Wins!`;
-            backgroundContainer.classList.remove('background-lose');
+
             backgroundContainer.classList.add('background-win');
-            
+            setTimeout(`backgroundContainer.classList.remove('background-win')`, 1100);
+
             userPoints++;
             userScore.innerText = `${userPoints}`;
 
             gameScoreCheck(userPoints, computerPoints);
-        }else{
+        } else {
             currentInfo.innerText = `${currentGame} `;
             currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Loses`;
 
-            backgroundContainer.classList.remove('background-win');
             backgroundContainer.classList.add('background-lose');
+            setTimeout(`backgroundContainer.classList.remove('background-lose');`, 1100)
 
             computerPoints++;
             computerScore.innerText = `${computerPoints}`;
 
             gameScoreCheck(userPoints, computerPoints);
         }
-    }else if(userInput === "Paper"){
-        if(randomPCInput === "Rock"){
+    } else if (userInput === "Paper") {
+        if (randomPCInput === "Rock") {
             currentInfo.innerText = `${currentGame}`;
             currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Wins!`;
 
-            backgroundContainer.classList.remove('background-lose');
             backgroundContainer.classList.add('background-win');
+            setTimeout(`backgroundContainer.classList.remove('background-win')`, 1100);
+
 
             userPoints++;
             userScore.innerText = `${userPoints}`;
 
             gameScoreCheck(userPoints, computerPoints);
-        }else{
+        } else {
             currentInfo.innerText = `${currentGame}`;
             currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Loses`;
 
-            backgroundContainer.classList.remove('background-win');
             backgroundContainer.classList.add('background-lose');
+            setTimeout(`backgroundContainer.classList.remove('background-lose');`, 1100)
 
             computerPoints++;
             computerScore.innerText = `${computerPoints}`;
 
             gameScoreCheck(userPoints, computerPoints);
         }
-    }else if(userInput === "Scissors"){
-        if(randomPCInput === "Paper"){
+    } else if (userInput === "Scissors") {
+        if (randomPCInput === "Paper") {
             currentInfo.innerText = `${currentGame}`;
             currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Wins!`;
 
-            backgroundContainer.classList.remove('background-lose');
             backgroundContainer.classList.add('background-win');
+            setTimeout(`backgroundContainer.classList.remove('background-win')`, 1100);
 
             userPoints++;
             userScore.innerText = `${userPoints}`;
 
             gameScoreCheck(userPoints, computerPoints);
-        }else{
+        } else {
             currentInfo.innerText = `${currentGame}`;
             currentInfoUser.innerText = `${localStorage.getItem("userNameStorage", "value")} Loses`;
 
-            backgroundContainer.classList.remove('background-win');
             backgroundContainer.classList.add('background-lose');
+            setTimeout(`backgroundContainer.classList.remove('background-lose');`, 1100)
 
             computerPoints++;
             computerScore.innerText = `${computerPoints}`;
@@ -148,16 +150,16 @@ function compareInputs(randomPCInput, userInput){
     }
 }
 // Function to end the game when user or computer reaches 3 points
-function gameScoreCheck(userPoints, computerPoints){
-    if (userPoints === 3){
+function gameScoreCheck(userPoints, computerPoints) {
+    if (userPoints === 3) {
         alert(`${localStorage.getItem("userNameStorage", "value")} wins! Click ok to reset the game`);
         userPoints = 0;
         userScore.innerText = `${userPoints}`;
         computerPoints = 0;
         computerScore.innerText = `${computerPoints}`;
         location.reload();
-        
-    }else if (computerPoints === 3){
+
+    } else if (computerPoints === 3) {
         alert(`${localStorage.getItem("userNameStorage", "value")} loses. Click ok to reset the game`);
         userPoints = 0;
         userScore.innerText = `${userPoints}`;
